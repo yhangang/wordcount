@@ -44,7 +44,7 @@ public class HDFSUtil {
 	 * @param contents
 	 * @throws IOException
 	 */
-	public static void createFile(Configuration conf, String filePath,
+	public static void create(Configuration conf, String filePath,
 			byte[] contents) throws IOException {
 		FileSystem fs = FileSystem.get(conf);
 		Path path = new Path(filePath);
@@ -64,7 +64,7 @@ public class HDFSUtil {
 	 */
 	public static void create(Configuration conf, String filePath,
 			String fileContent) throws IOException {
-		createFile(conf, filePath, fileContent.getBytes());
+		create(conf, filePath, fileContent.getBytes());
 	}
 	
 	/**
@@ -108,11 +108,11 @@ public class HDFSUtil {
 	 * @throws IOException
 	 */
 	public static void download(Configuration conf,
-			String localFilePath, String remoteFilePath) throws IOException {
+			String remoteFilePath, String localFilePath) throws IOException {
 		FileSystem fs = FileSystem.get(conf);
 		Path localPath = new Path(localFilePath);
 		Path remotePath = new Path(remoteFilePath);
-		fs.copyToLocalFile(false, localPath, remotePath);
+		fs.copyToLocalFile(false, remotePath, localPath,true);
 		fs.close();
 	}
 	
@@ -249,8 +249,7 @@ public class HDFSUtil {
 
 	public static void main(String[] args) throws IOException {
 		Configuration conf = new Configuration();
-		conf.set("fs.defaultFS", "hdfs://192.168.230.148:9000");
-		// System.out.println(readFile(conf, "/input/input.txt"));
-		System.out.println(getDatanodeReport(conf));
+		conf.set("fs.defaultFS", "hdfs://192.168.215.135:9000");
+		 System.out.println(read(conf, "/input/input.txt"));
 	}
 }
