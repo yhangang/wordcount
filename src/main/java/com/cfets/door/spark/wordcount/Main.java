@@ -25,8 +25,8 @@ public class Main {
 		// 初始化spark配置
 		SparkConf conf = new SparkConf().setAppName("word count");
 //		 conf.setMaster("local[2]");
-		 conf.set("spark.executor.memory", "1g");
-		 conf.set("spark.cores.max", "2");
+//		 conf.set("spark.executor.memory", "1g");
+//		 conf.set("spark.cores.max", "2");
 		JavaSparkContext sc = new JavaSparkContext(conf);
 
 		JavaRDD<String> lines = sc.textFile(args[0], 1);
